@@ -1,10 +1,9 @@
-package rs.raf.projekat1.luka_petrovic_rn3318.ui.dashboard;
+package rs.raf.projekat1.luka_petrovic_rn3318.ui.new_entry;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,20 +13,19 @@ import androidx.lifecycle.ViewModelProvider;
 
 import rs.raf.projekat1.luka_petrovic_rn3318.R;
 
-public class DashboardFragment extends Fragment {
+public class NewEntryFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private NewEntryViewModel newEntryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        newEntryViewModel =
+                new ViewModelProvider(this).get(NewEntryViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_new_entry, container, false);
+        newEntryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+//                textView.setText(s);
             }
         });
         return root;
