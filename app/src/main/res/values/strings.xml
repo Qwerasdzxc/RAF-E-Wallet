@@ -36,4 +36,20 @@
     <string name="profile_button_logout_text">Logout</string>
     <string name="list_tab_income_text">Income</string>
     <string name="list_tab_outcome_text">Outcome</string>
+    <string name="new_entry_title_required">Title is required</string>
+    <string name="new_entry_value_required">Value is required</string>
+    <string name="new_entry_description_required">Description is required</string>
+    <string name="new_entry_audio_required">Audio is required</string>
+    <string name="new_entry_value_format">Value is in bad format</string>
+    <string name="new_entry_success">Entry successfully added</string>
+    <string name="edit_entry_title_text">Edit entry</string>
+    <string name="edit_entry_title_tv">Title:</string>
+    <string name="edit_entry_value_tv">Value:</string>
+    <string name="edit_entry_description_tv">Description:</string>
+    <string name="edit_entry_cancel_button">Cancel</string>
+    <string name="edit_entry_edit_button">Edit</string>
+    <string-array name="new_entry_spinner_items">
+        <item>Income</item>
+        <item>Outcome</item>
+    </string-array>
 </resources>

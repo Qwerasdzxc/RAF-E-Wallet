@@ -1,5 +1,7 @@
 package rs.raf.projekat1.luka_petrovic_rn3318.ui.list;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import rs.raf.projekat1.luka_petrovic_rn3318.R;
 import rs.raf.projekat1.luka_petrovic_rn3318.models.Outcome;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.adapters.OutcomeListAdapter;
+import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.edit.EditOutcomeActivity;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.view_models.OutcomeViewModel;
 
 public class OutcomeFragment extends Fragment {
 
     private OutcomeViewModel viewModel;
     private OutcomeListAdapter adapter;
+
+    private final int EDIT_INTENT_KEY = 1;
 
     public static OutcomeFragment newInstance() {
         return new OutcomeFragment();
@@ -49,7 +54,9 @@ public class OutcomeFragment extends Fragment {
             viewModel.deleteOutcome(outcome);
             return null;
         }, outcome -> {
-            System.out.println("Open edit page");
+            Intent intent = new Intent(getActivity(), EditOutcomeActivity.class);
+            intent.putExtra("outcome", outcome);
+            startActivityForResult(intent, EDIT_INTENT_KEY);
             return null;
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -66,5 +73,18 @@ public class OutcomeFragment extends Fragment {
             adapter.submitList(outcomeData);
             adapter.notifyDataSetChanged();
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_CANCELED)
+            return;
+        if (requestCode != EDIT_INTENT_KEY || resultCode != Activity.RESULT_OK)
+            return;
+
+        Outcome current = (Outcome) data.getSerializableExtra("current_outcome");
+        viewModel.updateOutcome(current);
+        adapter.notifyDataSetChanged();
     }
 }

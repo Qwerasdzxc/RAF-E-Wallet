@@ -1,5 +1,7 @@
 package rs.raf.projekat1.luka_petrovic_rn3318.ui.list;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import rs.raf.projekat1.luka_petrovic_rn3318.R;
 import rs.raf.projekat1.luka_petrovic_rn3318.models.Income;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.adapters.IncomeListAdapter;
+import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.edit.EditIncomeActivity;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.view_models.IncomeViewModel;
 
 public class IncomeFragment extends Fragment {
 
     private IncomeViewModel viewModel;
     private IncomeListAdapter adapter;
+
+    private final int EDIT_INTENT_KEY = 1;
 
     public static IncomeFragment newInstance() {
         return new IncomeFragment();
@@ -49,7 +54,9 @@ public class IncomeFragment extends Fragment {
             viewModel.deleteIncome(income);
             return null;
         }, income -> {
-            System.out.println("Open edit page");
+            Intent intent = new Intent(getActivity(), EditIncomeActivity.class);
+            intent.putExtra("income", income);
+            startActivityForResult(intent, EDIT_INTENT_KEY);
             return null;
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -68,4 +75,16 @@ public class IncomeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_CANCELED)
+            return;
+        if (requestCode != EDIT_INTENT_KEY || resultCode != Activity.RESULT_OK)
+            return;
+
+        Income current = (Income) data.getSerializableExtra("current_income");
+        viewModel.updateIncome(current);
+        adapter.notifyDataSetChanged();
+    }
 }

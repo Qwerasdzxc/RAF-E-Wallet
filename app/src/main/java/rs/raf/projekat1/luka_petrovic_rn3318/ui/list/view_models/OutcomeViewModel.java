@@ -19,7 +19,7 @@ public class OutcomeViewModel extends ViewModel {
         List<Outcome> seedData = new ArrayList<>(5);
         Random random = new Random();
         for (int i = 0; i < 5; i++)
-            seedData.add(new Outcome(i, random.nextInt(10000), "Outcome " + i, "Description of outcome " + i));
+            seedData.add(new Outcome(i, random.nextInt(10000), "Outcome " + (i + 1), "Description of outcome " + i));
 
         outcomeData.setValue(seedData);
     }
@@ -30,7 +30,7 @@ public class OutcomeViewModel extends ViewModel {
         outcomeData.setValue(currentData);
     }
 
-    public void editOutcome(Outcome outcome) {
+    public void updateOutcome(Outcome outcome) {
         List<Outcome> currentData = new ArrayList<>(outcomeData.getValue());
         for (Outcome curr : currentData) {
             if (curr.getId().equals(outcome.getId())) {
@@ -51,5 +51,15 @@ public class OutcomeViewModel extends ViewModel {
 
     public LiveData<List<Outcome>> getOutcomeData() {
         return outcomeData;
+    }
+
+    public int getAvailableId() {
+        int maxId = 0;
+        for (Outcome curr : outcomeData.getValue()) {
+            if (curr.getId() > maxId)
+                maxId = curr.getId();
+        }
+
+        return maxId + 1;
     }
 }

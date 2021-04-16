@@ -5,19 +5,37 @@ package rs.raf.projekat1.luka_petrovic_rn3318.ui.login.data.model;
  */
 public class LoggedInUser {
 
-    private String userId;
-    private String displayName;
+    private String name;
+    private String surname;
+    private String bank;
 
-    public LoggedInUser(String userId, String displayName) {
-        this.userId = userId;
-        this.displayName = displayName;
+    public LoggedInUser(String name, String surname, String bank) {
+        this.name = name;
+        this.surname = surname;
+        this.bank = bank;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getName() {
+        return name;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
     }
 }

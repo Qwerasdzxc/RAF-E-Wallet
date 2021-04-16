@@ -20,7 +20,7 @@ public class IncomeViewModel extends ViewModel {
         List<Income> seedData = new ArrayList<>(5);
         Random random = new Random();
         for (int i = 0; i < 5; i++)
-            seedData.add(new Income(i, random.nextInt(10000), "Income " + i, "Description of income " + i));
+            seedData.add(new Income(i, random.nextInt(10000), "Income " + (i + 1), "Description of income " + i));
 
         incomeData.setValue(seedData);
     }
@@ -31,7 +31,7 @@ public class IncomeViewModel extends ViewModel {
         incomeData.setValue(currentData);
     }
 
-    public void editIncome(Income income) {
+    public void updateIncome(Income income) {
         List<Income> currentData = new ArrayList<>(incomeData.getValue());
         for (Income curr : currentData) {
             if (curr.getId().equals(income.getId())) {
@@ -52,5 +52,15 @@ public class IncomeViewModel extends ViewModel {
 
     public LiveData<List<Income>> getIncomeData() {
         return incomeData;
+    }
+
+    public int getAvailableId() {
+        int maxId = 0;
+        for (Income curr : incomeData.getValue()) {
+            if (curr.getId() > maxId)
+                maxId = curr.getId();
+        }
+
+        return maxId + 1;
     }
 }

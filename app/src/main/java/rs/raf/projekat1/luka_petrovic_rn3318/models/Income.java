@@ -1,12 +1,13 @@
 package rs.raf.projekat1.luka_petrovic_rn3318.models;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Created by Qwerasdzxc on 4/16/21.
  */
-public class Income {
+public class Income implements Serializable {
 
     private Integer id;
     private Integer value;
