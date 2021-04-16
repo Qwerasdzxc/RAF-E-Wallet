@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import rs.raf.projekat1.luka_petrovic_rn3318.R;
 import rs.raf.projekat1.luka_petrovic_rn3318.models.Income;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.adapters.IncomeListAdapter;
+import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.details.IncomeDetailsActivity;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.edit.EditIncomeActivity;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.view_models.IncomeViewModel;
 
@@ -48,7 +49,9 @@ public class IncomeFragment extends Fragment {
                 return oldItem.equals(newItem);
             }
         }, income -> {
-            System.out.println("Open view page");
+            Intent intent = new Intent(getActivity(), IncomeDetailsActivity.class);
+            intent.putExtra("income", income);
+            startActivity(intent);
             return null;
         }, income -> {
             viewModel.deleteIncome(income);

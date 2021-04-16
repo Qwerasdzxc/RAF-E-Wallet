@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
 
 import rs.raf.projekat1.luka_petrovic_rn3318.R;
 import rs.raf.projekat1.luka_petrovic_rn3318.models.Income;
@@ -23,6 +27,11 @@ public class EditIncomeActivity extends AppCompatActivity {
     private ImageView audioButton;
 
     private Income originalIncome;
+
+    private MediaRecorder mediaRecorder;
+
+    private boolean isRecording = false;
+    private File recording;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -41,7 +50,40 @@ public class EditIncomeActivity extends AppCompatActivity {
 
         titleEditText.setText(originalIncome.getTitle());
         valueEditText.setText(originalIncome.getValue().toString());
-        descriptionEditText.setText(originalIncome.getDescription());
+
+        if (originalIncome.getAudioRecording() != null) {
+            descriptionEditText.setVisibility(View.GONE);
+            audioButton.setVisibility(View.VISIBLE);
+
+            audioButton.setOnClickListener(__ -> {
+                if (!isRecording) {
+                    Toast.makeText(this, "Started recording", Toast.LENGTH_SHORT).show();
+                    File folder = new File(this.getFilesDir(), "recordings");
+                    if (!folder.exists()) folder.mkdir();
+                    recording = new File(folder, "recording" + originalIncome.getId() + ".3gp");
+
+                    mediaRecorder = new MediaRecorder();
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                    mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+                    mediaRecorder.setOutputFile(recording);
+
+                    try {
+                        mediaRecorder.prepare();
+                        mediaRecorder.start();
+                        isRecording = true;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(this, "Finished recording", Toast.LENGTH_SHORT).show();
+                    mediaRecorder.stop();
+                    mediaRecorder.release();
+                }
+            });
+        } else {
+            descriptionEditText.setText(originalIncome.getDescription());
+        }
 
         cancelButton.setOnClickListener(view -> {
             setResult(Activity.RESULT_CANCELED, null);
@@ -67,7 +109,11 @@ public class EditIncomeActivity extends AppCompatActivity {
             }
             // Audio entry:
             if (originalIncome.getAudioRecording() != null) {
-                // TODO: Audio implementation
+                Income income = new Income(originalIncome.getId(), Integer.parseInt(valueEditText.getText().toString()), titleEditText.getText().toString(), recording);
+                Intent intent = new Intent();
+
+                intent.putExtra("current_income", income);
+                setResult(Activity.RESULT_OK, intent);
             }
             // Description entry:
             else {
@@ -80,8 +126,8 @@ public class EditIncomeActivity extends AppCompatActivity {
 
                 intent.putExtra("current_income", income);
                 setResult(Activity.RESULT_OK, intent);
-                finish();
             }
+            finish();
         });
     }
 }

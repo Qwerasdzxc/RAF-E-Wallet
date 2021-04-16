@@ -50,6 +50,12 @@ public class ProfileFragment extends Fragment {
 
         logoutButton.setOnClickListener(view -> {
             LoginRepository.getInstance().logout();
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getActivity().getPackageName(), Context.MODE_PRIVATE);
+            sharedPreferences.edit()
+                    .putString(Constants.KEY_NAME, null)
+                    .putString(Constants.KEY_SURNAME, null)
+                    .putString(Constants.KEY_BANK, null)
+                    .apply();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
             getActivity().finish();

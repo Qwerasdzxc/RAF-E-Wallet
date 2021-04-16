@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import rs.raf.projekat1.luka_petrovic_rn3318.R;
 import rs.raf.projekat1.luka_petrovic_rn3318.models.Outcome;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.adapters.OutcomeListAdapter;
+import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.details.IncomeDetailsActivity;
+import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.details.OutcomeDetailsActivity;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.edit.EditOutcomeActivity;
 import rs.raf.projekat1.luka_petrovic_rn3318.ui.list.view_models.OutcomeViewModel;
 
@@ -48,7 +50,9 @@ public class OutcomeFragment extends Fragment {
                 return oldItem.equals(newItem);
             }
         }, outcome -> {
-            System.out.println("Open view page");
+            Intent intent = new Intent(getActivity(), OutcomeDetailsActivity.class);
+            intent.putExtra("outcome", outcome);
+            startActivity(intent);
             return null;
         }, outcome -> {
             viewModel.deleteOutcome(outcome);
