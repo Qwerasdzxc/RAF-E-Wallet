@@ -19,7 +19,7 @@ public class OutcomeViewModel extends ViewModel {
         List<Outcome> seedData = new ArrayList<>(5);
         Random random = new Random();
         for (int i = 0; i < 5; i++)
-            seedData.add(new Outcome(i, random.nextInt(100000), "Outcome " + i, "Description of outcome " + i));
+            seedData.add(new Outcome(i, random.nextInt(10000), "Outcome " + i, "Description of outcome " + i));
 
         outcomeData.setValue(seedData);
     }

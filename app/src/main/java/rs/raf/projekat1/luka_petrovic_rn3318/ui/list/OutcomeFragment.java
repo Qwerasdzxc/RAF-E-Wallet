@@ -32,7 +32,6 @@ public class OutcomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.outcome_tab, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.outcome_tab_recycler_view);
-        recyclerView.setItemAnimator(null);
         adapter = new OutcomeListAdapter(new DiffUtil.ItemCallback<Outcome>() {
             @Override
             public boolean areItemsTheSame(@NonNull Outcome oldItem, @NonNull Outcome newItem) {
@@ -63,6 +62,9 @@ public class OutcomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = new ViewModelProvider(getActivity()).get(OutcomeViewModel.class);
-        viewModel.getOutcomeData().observe(getViewLifecycleOwner(), outcomeData -> adapter.submitList(outcomeData));
+        viewModel.getOutcomeData().observe(getViewLifecycleOwner(), outcomeData -> {
+            adapter.submitList(outcomeData);
+            adapter.notifyDataSetChanged();
+        });
     }
 }

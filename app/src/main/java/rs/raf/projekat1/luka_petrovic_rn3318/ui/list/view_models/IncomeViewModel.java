@@ -20,7 +20,7 @@ public class IncomeViewModel extends ViewModel {
         List<Income> seedData = new ArrayList<>(5);
         Random random = new Random();
         for (int i = 0; i < 5; i++)
-            seedData.add(new Income(i, random.nextInt(100000), "Income " + i, "Description of income " + i));
+            seedData.add(new Income(i, random.nextInt(10000), "Income " + i, "Description of income " + i));
 
         incomeData.setValue(seedData);
     }

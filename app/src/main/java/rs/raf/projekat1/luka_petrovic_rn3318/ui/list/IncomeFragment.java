@@ -32,7 +32,6 @@ public class IncomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.income_tab, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.income_tab_recycler_view);
-        recyclerView.setItemAnimator(null);
         adapter = new IncomeListAdapter(new DiffUtil.ItemCallback<Income>() {
             @Override
             public boolean areItemsTheSame(@NonNull Income oldItem, @NonNull Income newItem) {
@@ -63,7 +62,10 @@ public class IncomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = new ViewModelProvider(getActivity()).get(IncomeViewModel.class);
-        viewModel.getIncomeData().observe(getViewLifecycleOwner(), incomeData -> adapter.submitList(incomeData));
+        viewModel.getIncomeData().observe(getViewLifecycleOwner(), incomeData -> {
+            adapter.submitList(incomeData);
+            adapter.notifyDataSetChanged();
+        });
     }
 
 }
