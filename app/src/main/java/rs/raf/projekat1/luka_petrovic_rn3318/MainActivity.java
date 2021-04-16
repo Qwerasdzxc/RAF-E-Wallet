@@ -1,5 +1,7 @@
 package rs.raf.projekat1.luka_petrovic_rn3318;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
