@@ -4,4 +4,10 @@
     <string name="title_add">New entry</string>
     <string name="title_list">List</string>
     <string name="title_profile">Profile</string>
+    <string name="input_description_hint">Description</string>
+    <string name="input_quantity_hint">Value</string>
+    <string name="input_title_hint">Title</string>
+    <string name="input_audio_text">Audio</string>
+    <string name="input_button_text">Add to list</string>
+    <string name="input_header_text">New income/outcome</string>
 </resources>
