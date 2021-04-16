@@ -48,6 +48,9 @@
     <string name="edit_entry_description_tv">Description:</string>
     <string name="edit_entry_cancel_button">Cancel</string>
     <string name="edit_entry_edit_button">Edit</string>
+    <string name="profile_name_required">Name is required</string>
+    <string name="profile_surname_required">Surname is required</string>
+    <string name="profile_bank_required">Bank is required</string>
     <string-array name="new_entry_spinner_items">
         <item>Income</item>
         <item>Outcome</item>

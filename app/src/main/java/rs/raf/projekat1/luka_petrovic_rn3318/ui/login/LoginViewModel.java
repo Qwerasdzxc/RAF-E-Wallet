@@ -29,12 +29,14 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String name, String surname, String bank, String password) {
+        if (!password.equals("12345"))
+            return;
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(name, surname, bank, password);
+        Result<LoggedInUser> result = loginRepository.login(name, surname, bank);
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getName(), data.getSurname(), data.getBank())));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }
