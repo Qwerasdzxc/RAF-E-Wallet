@@ -4,55 +4,59 @@
     android:background="@drawable/border_income_list_item"
     android:backgroundTint="@color/light_grey"
     android:layout_margin="10dp"
+    android:id="@+id/income_list_item"
     android:layout_width="match_parent" android:layout_height="100dp">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginStart="24dp"
+        app:tint="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_attach_money_24" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/income_list_item_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/income_list_item_value_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="16dp"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView2" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/income_list_item_delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_notifications_black_24dp" />
+        app:srcCompat="@drawable/outline_delete_24" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/income_list_item_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_home_black_24dp" />
+        app:srcCompat="@drawable/outline_edit_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
